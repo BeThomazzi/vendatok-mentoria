@@ -109,8 +109,8 @@ A página parte de um problema real de quem já usa o TikTok Shop: gerar visuali
 ## 🚀 Executando localmente
 
 ```bash
-git clone https://github.com/BeThomazzi/lp-mentoria.git
-cd lp-mentoria
+git clone https://github.com/BeThomazzi/vendatok-mentoria.git
+cd vendatok-mentoria
 npm install
 npm run dev
 ```
@@ -220,8 +220,8 @@ The page starts from a real problem faced by TikTok Shop users: getting views is
 ## 🚀 Getting Started
 
 ```bash
-git clone https://github.com/BeThomazzi/lp-mentoria.git
-cd lp-mentoria
+git clone https://github.com/BeThomazzi/vendatok-mentoria.git
+cd vendatok-mentoria
 npm install
 npm run dev
 ```
