@@ -1,0 +1,180 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-haze: var(--haze);
+
+  /* Preserva variáveis de fonte do Next.js se existirem, com fallback para as do Lovable */
+  --font-display: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-geist-sans, "Instrument Sans", ui-sans-serif, system-ui, sans-serif);
+  --font-mono: var(--font-geist-mono, ui-monospace, monospace);
+}
+
+:root {
+  --radius: 0.5rem;
+
+  /* Brand base */
+  --ink: oklch(0.14 0.004 285);
+  --paper: oklch(0.968 0.006 85);
+  --haze: oklch(0.905 0.006 85);
+
+  --background: oklch(0.13 0.004 285);
+  --foreground: oklch(0.968 0.006 85);
+  --card: oklch(0.17 0.005 285);
+  --card-foreground: oklch(0.968 0.006 85);
+  --popover: oklch(0.17 0.005 285);
+  --popover-foreground: oklch(0.968 0.006 85);
+  --primary: oklch(0.63 0.212 24);
+  --primary-foreground: oklch(0.985 0.005 85);
+  --secondary: oklch(0.22 0.005 285);
+  --secondary-foreground: oklch(0.968 0.006 85);
+  --muted: oklch(0.22 0.005 285);
+  --muted-foreground: oklch(0.66 0.008 285);
+  --accent: oklch(0.63 0.212 24);
+  --accent-foreground: oklch(0.985 0.005 85);
+  --destructive: oklch(0.6 0.22 25);
+  --destructive-foreground: oklch(0.985 0.005 85);
+  --border: oklch(1 0 0 / 12%);
+  --input: oklch(1 0 0 / 14%);
+  --ring: oklch(0.63 0.212 24);
+}
+
+/* Light surface used by the editorial "problem" band */
+.surface-paper {
+  --background: var(--paper);
+  --foreground: oklch(0.14 0.004 285);
+  --muted-foreground: oklch(0.45 0.008 285);
+  --border: oklch(0.14 0.004 285 / 14%);
+  background-color: var(--background);
+  color: var(--foreground);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--primary);
+    color: var(--primary-foreground);
+  }
+}
+
+@utility display {
+  font-family: var(--font-display);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 0.95;
+}
+
+@utility eyebrow {
+  font-size: 0.6875rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 600;
+  color: var(--muted-foreground);
+}
+
+@utility rule-line {
+  height: 1px;
+  width: 100%;
+  background: linear-gradient(
+    to right,
+    color-mix(in oklab, var(--primary) 60%, transparent),
+    transparent
+  );
+}
+
+@utility cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  background: var(--primary);
+  color: var(--primary-foreground);
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: -0.01em;
+  padding: 1.05rem 1.9rem;
+  border-radius: 999px;
+  transition:
+    transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.35s ease,
+    background 0.3s ease;
+  box-shadow: 0 12px 34px -14px color-mix(in oklab, var(--primary) 85%, transparent);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 44px -16px color-mix(in oklab, var(--primary) 90%, transparent);
+  }
+}
+
+@utility cta-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  padding: 1.05rem 1.9rem;
+  font-weight: 600;
+  font-size: 0.98rem;
+  transition: opacity 0.3s ease;
+
+  &:hover {
+    opacity: 0.65;
+  }
+}
+
+/* GSAP reveal primitives */
+.reveal {
+  opacity: 1;
+}
+
+.js-ready .reveal {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js-ready .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
